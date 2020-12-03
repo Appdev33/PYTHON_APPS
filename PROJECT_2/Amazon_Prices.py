@@ -61,22 +61,7 @@ def check_price():
 
 
 
-def send_Email():
-      server = smtplib.SMTP('smtp.gmail.com',587)
-      server.ehlo()
-      server.starttls()
-      server.ehlo()
-      server.login('app.devplatform@gmail.com','nxdrcppusioaywby')
-      subject = 'Price Fell Down For'
-      body = 'Check the amazon link  https://www.amazon.in/dp/B07SQXPW35/ref=s9_acsd_hps_bw_c2_x_0_i?pf_rd_m=A1K21FY43GMZF8&pf_rd_s=merchandised-search-4&pf_rd_r=1P0WWYXN281RXPJWSB83&pf_rd_t=101&pf_rd_p=7c00f914-cf00-443d-a66f-f9afe38e169a&pf_rd_i=21243324031'
-      msg = 'hw'#f'Subject:{subject}\n\n{body}'
-      server.sendmail('app.devplatform@gmail.com',
-                      'ntsh334u@gmail.com',
-                      msg
-                      )
-      print('HEY EMAIL HAS BEEN SENT!')
 
-      server.quit()
 
 while(True):
       check_price()
