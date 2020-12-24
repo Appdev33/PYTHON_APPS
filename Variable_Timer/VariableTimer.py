@@ -25,6 +25,14 @@ countdown(int(t))
 import time
 from tkinter import *
 from tkinter import messagebox
+import winsound
+duration = 500  # milliseconds
+freq = 500  # Hz
+import pyttsx3
+engine = pyttsx3.init()
+
+
+
 
 # creating Tk window
 root = Tk()
@@ -51,20 +59,21 @@ second.set("00")
 
 hourEntry = Entry(root, width=3, font=("Arial", 18, ""),
                   textvariable=hour)
-hourEntry.place(x=80, y=80)
+hourEntry.place(x=20, y=80)
 
 minuteEntry = Entry(root, width=3, font=("Arial", 18, ""),
                     textvariable=minute)
-minuteEntry.place(x=130, y=80)
+minuteEntry.place(x=60, y=80)
 
 secondEntry = Entry(root, width=3, font=("Arial", 18, ""),
                     textvariable=second)
-secondEntry.place(x=180, y=80)
+secondEntry.place(x=100, y=80)
 
 times = Entry(root, width=3, font=("Arial", 20, ""),
                   textvariable=hour)
 times.place(x=130, y=20)
 
+stop =0;
 def submit():
     try:
         # the input provided by the user is
@@ -73,6 +82,7 @@ def submit():
     except:
         print("Please input the right value")
     while temp > -1:
+
 
         # divmod(firstvalue = temp//60, secondvalue = temp%60)
         mins, secs = divmod(temp, 60)
@@ -92,13 +102,21 @@ def submit():
         minute.set("{0:2d}".format(mins))
         second.set("{0:2d}".format(secs))
 
+
         # updating the GUI window after decrementing the
         # temp value every time
         root.update()
-        if(int(second.get())<=5):
-            print(temp)
+        count = int(second.get())
+        if(temp<6):
+            #winsound.Beep(freq, duration)
+            engine.setProperty('rate', 170)
+            engine.say(str(int(second.get())))
+            engine.runAndWait()
 
-        time.sleep(1)
+
+        if(count>5):
+         time.sleep(1)
+
 
 
         # when temp value = 0; then a messagebox pop's up
@@ -112,12 +130,25 @@ def submit():
         # by one
         temp -= 1
 
+def reset_values():
+    hour.set(0)
+    minute.set(0)
+    second.set(0)
+    global stop
+    stop=1
+
+
+
+
 
 # button widget
-btn = Button(root, text='Set Time Countdown', bd='5',
+btn = Button(root, text='Start', bd='5',
              command=submit)
-btn.place(x=85, y=120)
+btn.place(x=150, y=80)
 
+btn = Button(root, text='Stop', bd='5',
+             command=reset_values)
+btn.place(x=200, y=80)
 # infinite loop which is required to
 # run tkinter program infinitely
 # until an interrupt occurs
