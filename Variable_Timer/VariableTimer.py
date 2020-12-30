@@ -31,19 +31,53 @@ freq = 500  # Hz
 import pyttsx3
 engine = pyttsx3.init()
 
-
-
-
 # creating Tk window
 root = Tk()
 
 # setting geometry of tk window
-root.geometry("300x200")
+root.geometry("300x250")
 
 # Using title() to display a message in
 # the dialogue box of the message in the
 # title bar.
 root.title("Time Counter")
+
+# dynmically ADD timer Button x cordinate
+
+y_cordinate_text=120
+
+def Add_Timer():
+    global y_cordinate_text
+
+    hourEntry = Entry(root, width=3, font=("Arial", 18, ""),
+                      textvariable=hour)
+    hourEntry.place(x=20, y=y_cordinate_text)
+
+    minuteEntry = Entry(root, width=3, font=("Arial", 18, ""),
+                        textvariable=minute)
+    minuteEntry.place(x=60, y=y_cordinate_text)
+
+    secondEntry = Entry(root, width=3, font=("Arial", 18, ""),
+                        textvariable=second)
+    secondEntry.place(x=100, y=y_cordinate_text)
+
+    Addbtn.place(x=55, y=y_cordinate_text+40)
+    #Buttons
+    btn = Button(root, text='Start', bd='5',
+                 command=submit)
+    btn.place(x=150, y=y_cordinate_text)
+    btn = Button(root, text='Stop', bd='5',
+                 command=reset_values)
+    btn.place(x=200, y=y_cordinate_text)
+    btn = Button(root, text='Reset', bd='5',
+                 command=reset_values)
+    btn.place(x=250, y=y_cordinate_text)
+
+    y_cordinate_text+=40
+    return 0;
+
+
+
 
 # Declaration of variables
 hour = StringVar()
@@ -69,9 +103,11 @@ secondEntry = Entry(root, width=3, font=("Arial", 18, ""),
                     textvariable=second)
 secondEntry.place(x=100, y=80)
 
-times = Entry(root, width=3, font=("Arial", 20, ""),
-                  textvariable=hour)
-times.place(x=130, y=20)
+secondEntry = Entry(root, width=3, font=("Arial", 20, ""),
+                  textvariable=second)
+secondEntry.place(x=130, y=20)
+
+
 
 stop =0;
 def submit():
@@ -115,7 +151,7 @@ def submit():
 
 
         if(count>5):
-            time.sleep(1)
+         time.sleep(1)
 
 
 
@@ -149,6 +185,16 @@ btn.place(x=150, y=80)
 btn = Button(root, text='Stop', bd='5',
              command=reset_values)
 btn.place(x=200, y=80)
+
+btn = Button(root, text='Reset', bd='5',
+             command=reset_values)
+btn.place(x=250, y=80)
+
+Addbtn = Button(root, text='Add Timer', bd='5',
+             command=Add_Timer)
+
+Addbtn.place(x=55, y=120)
+
 # infinite loop which is required to
 # run tkinter program infinitely
 # until an interrupt occurs
