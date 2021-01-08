@@ -5,3 +5,6 @@
 3. Online Sale Price Tracker -- Continuously track Prices on Amazon/Flipkart
 4. Variable Timer --- Multiple Timers Tinkter
 5. Key Logger in Python
+6. Automatic Birthday Wisher
+7. Expense Tracker
+
