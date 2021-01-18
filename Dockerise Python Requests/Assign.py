@@ -4,7 +4,7 @@ import json
 
 //Making some changes here
 
-Url = "https://api.macaddress.io/v1?apiKey=at_Xv2Z6uVSr0a5O045KtgDw2F0Ri5gQ&output=json&search=44:38:39:ff:ef:57"
+#Url =
 payload= {}
 headers= {}
 
