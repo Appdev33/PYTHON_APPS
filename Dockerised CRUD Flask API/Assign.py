@@ -1,8 +1,6 @@
 import requests
 import json
 
-
-
 #Url = \
 payload= {}
 headers= {}
