@@ -1,6 +1,7 @@
 import speech_recognition as sr
 import pyttsx3
 import time
+#https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio
 engine = pyttsx3.init()
 
 
