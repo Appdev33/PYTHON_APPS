@@ -1,4 +1,3 @@
-
 import requests
 from bs4 import BeautifulSoup
 import smtplib
@@ -8,11 +7,9 @@ import re
 import concurrent.futures
 from csv import reader
 
-def AmazonPrices(URL,CostAim):
-      headers = {
-            "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
+def AmazonPrices(URL,CostAim,header):
       try:
-            page = requests.get(URL, headers=headers)
+            page = requests.get(URL, headers=header)
             soup = BeautifulSoup(page.content, 'html.parser')
             title = soup.find(id="productTitle").get_text()
             print(title.strip())
@@ -55,11 +52,16 @@ def AmazonPrices(URL,CostAim):
             print(str(e))
       except KeyboardInterrupt:
             print("Someone closed the program")
+      except Exception as e:
+            print(e)
       finally:
             print('*********END OF CODE***********')
 
 
 def FlipKartPrices():
+      pass
+
+def MyntraPrices():
       pass
 
 urls=[]
@@ -71,16 +73,22 @@ with open('list.csv', 'r') as f:
 
 
 def check_price(url):
-      #for line in url:   without multithreading
+      # for line in url:   without multithreading
             link = url.split(';')[0]  #multithreading
       #     link = line.split(';')[0]   without multithreading
             price = 1
+            headers = {
+                  "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
+
             AmazonPattern   = re.search('amazon',link,re.IGNORECASE)
             FlipKartPattern = re.search('flipkart', link, re.IGNORECASE)
+            MyntraPattern =  re.search('myntra', link, re.IGNORECASE)
             if (AmazonPattern):
-                  AmazonPrices(link,price)
+                  AmazonPrices(link,price,headers)
             elif (FlipKartPattern):
                   print(FlipKartPattern)
+            elif (MyntraPattern):
+                 print(MyntraPattern)
 
 
 while(True):
@@ -90,9 +98,4 @@ while(True):
       # check_price(urls)   without multithreading
       t2 = time.perf_counter()
       print(f'Finished in {t2 - t1} seconds')
-      time.sleep(1)
-
-
-
-
-
+      time.sleep(10)
